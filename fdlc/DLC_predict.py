@@ -2,10 +2,13 @@ from scipy.optimize import linear_sum_assignment
 import torch
 import pickle
 import numpy as np
-from . import model.NIT_Registration as NIT_Registration
+from .model import NIT_Registration as NIT_Registration
 from scipy.special import softmax
 
 import matplotlib.pyplot as plt
+import pkg_resources
+
+model_folder = pkg_resources.resource_filename('fdlc', 'model/')
 
 
 def match_color_norm(x_cs, y_cs):
@@ -27,7 +30,7 @@ def predict_label(temp_pos, temp_label, test_pos, temp_color=None, test_color=No
     model = NIT_Registration(input_dim=3, n_hidden=128, n_layer=6, p_rotate=0, feat_trans=0, cuda=cuda)
     device = torch.device("cuda:0" if cuda else "cpu")
     # load trained model
-    model_path = "../model/model.bin"
+    model_path = model_folder+"model.bin"
     params = torch.load(model_path, map_location=lambda storage, loc: storage)
     model.load_state_dict(params['state_dict'])
     model = model.to(device)
