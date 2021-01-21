@@ -2,7 +2,7 @@ from scipy.optimize import linear_sum_assignment
 import torch
 import pickle
 import numpy as np
-from model import NIT_Registration
+from . import model.NIT_Registration as NIT_Registration
 from scipy.special import softmax
 
 import matplotlib.pyplot as plt
