@@ -11,14 +11,14 @@ requirements = [
 ]
 
 # Get git commit info to build version number/tag
-#repo = git.Repo('.git')
-#git_hash = repo.head.object.hexsha
-#git_url = repo.remotes.origin.url
-#v = repo.git.describe()
-#if repo.is_dirty(): v += ".dirty"
+repo = git.Repo('.git')
+git_hash = repo.head.object.hexsha
+git_url = repo.remotes.origin.url
+v = repo.git.describe(always=True)
+if repo.is_dirty(): v += ".dirty"
 
 setup(name='fdlc',
-#      version=v,
+      version=v,
       description='Deep Learning Correspondence for Neuron ID',
       author='Xinwei Yu',
       author_email='xinweiy@princeton.edu',
