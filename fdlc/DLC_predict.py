@@ -61,7 +61,10 @@ def predict_label(temp_pos, temp_label, test_pos, temp_color=None, test_color=No
     p_m = output_pairs['p_m'][i].detach().cpu().numpy()
     num_neui = len(pt_batch[i])
     p_m = p_m[:num_neui, :]
-    color_m = match_color_norm(data_batch['color'][data_batch['ref_i']], data_batch['color'][i]) * 60
+    if temp_color is not None: 
+        color_m = match_color_norm(data_batch['color'][data_batch['ref_i']], data_batch['color'][i]) * 60
+    else:
+        color_m = 0
     p_m = p_m[:, :-1] + color_m * 1
     row, col = linear_sum_assignment(-p_m)
 
